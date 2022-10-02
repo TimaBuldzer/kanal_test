@@ -12,7 +12,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     "apps_orders_tasks_create_orders": {
         "task": "apps.orders.tasks.create_orders",
-        "schedule": crontab(minute="*/1"),
+        "schedule": crontab(minute="*/5"),
     },
 
 }
