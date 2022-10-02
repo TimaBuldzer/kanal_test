@@ -12,9 +12,41 @@ services:
       - ./env/.env
     depends_on:
       - db
+      - redis
   db:
     image: postgres:13.0-alpine
     volumes:
       - ./data:/var/lib/postgresql/data/
     env_file:
       - ./env/.env
+
+  redis:
+    image: redis
+    restart: always
+    expose:
+      - 6379
+
+  worker:
+    restart: always
+    build: .
+    volumes:
+      - .:/usr/src/app/
+    env_file:
+      - ./env/.env
+    depends_on:
+      - redis
+      - web
+    command: 'celery -A conf worker -l info'
+
+  beat:
+    restart: always
+    build: .
+    volumes:
+      - .:/usr/src/app/
+    env_file:
+      - ./env/.env
+    depends_on:
+      - redis
+      - web
+      - worker
+    command: 'celery -A conf beat -l info'

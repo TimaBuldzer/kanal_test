@@ -31,12 +31,15 @@ class SpreadSheetParser:
         currency = TsbRfParser().get_usd_currency()
         orders_data: List[OrderData] = list()
         for row in spreadsheet_value:
-            orders_data.append(OrderData(
-                external_id=row[1],
-                price_usd=Decimal(row[2]),
-                price_rub=Decimal(row[2]) * currency.value,
-                delivery_dt=datetime.datetime.strptime(row[3], '%d.%m.%Y').date()
-            ))
+            try:
+                orders_data.append(OrderData(
+                    external_id=row[1],
+                    price_usd=Decimal(row[2]),
+                    price_rub=Decimal(row[2]) * currency.value,
+                    delivery_dt=datetime.datetime.strptime(row[3], '%d.%m.%Y').date()
+                ))
+            except IndexError:
+                continue
         return orders_data
 
     @staticmethod
