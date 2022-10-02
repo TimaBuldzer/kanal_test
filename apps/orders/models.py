@@ -10,8 +10,6 @@ class Order(models.Model):
     created_dt = models.DateTimeField(auto_now_add=True, verbose_name='Created date')
     updated_dt = models.DateTimeField(auto_now=True, verbose_name='Updated date')
 
-    expired_notification_sent = models.BooleanField(default=False, verbose_name='Expired notification sent')
-
     class Meta:
         verbose_name = 'Order'
         verbose_name_plural = 'Orders'

@@ -9,7 +9,7 @@ from googleapiclient.errors import HttpError
 from pydantic import BaseModel
 
 from apps.tsb_rf.parser import TsbRfParser
-from conf.google_api_conf import SCOPES, RANGE_NAME, SPREADSHEET_ID
+from conf.settings.google_api_conf import SCOPES, RANGE_NAME, SPREADSHEET_ID
 
 
 class OrderData(BaseModel):
