@@ -4,7 +4,7 @@ from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 # If modifying these scopes, delete the file token.json.
-from conf.settings.google_api_conf import SCOPES
+SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 
 def authorize() -> None:
